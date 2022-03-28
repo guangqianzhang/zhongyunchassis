@@ -1,0 +1,4 @@
+<launch>
+    <!-- <node pkg = "chassis" type = "sub" name="vcu_sub" output="screen"/> -->
+    <node pkg = "chassis2" type = "vcucan" name="vcu" output="screen"/>
+</launch>
