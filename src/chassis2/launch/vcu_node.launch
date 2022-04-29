@@ -1,0 +1,9 @@
+<launch>
+    <!-- <node pkg = "chassis" type = "sub" name="vcu_sub" output="screen"/> -->
+    <node pkg = "chassis2" type = "vcucan" name="vcu" output="screen">
+        <param name="chassis_able" type= "int" value="0"/>
+        <param name="chassis_gear" type="int" value="0"/>
+        <param name="chassis_vel" type="double" value="0"/>
+        <param name="chassis_str" type="double" value="0"/>
+    </node>
+</launch>
