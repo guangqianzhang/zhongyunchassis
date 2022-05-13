@@ -6,10 +6,10 @@
 + 完成速度闭环pid
 + 转角控制
 
-+ 这是一个功能包模块，需要下载到工作空间爱你src目录下
++ **chassis2** 这是一个功能包模块，需要下载到工作空间的src目录下
 
 ## 使用前加载can模块
-+ sudo modprobe gs_usb
++` sudo modprobe gs_usb`
 + 或者尝试以下：
     + modprobe can      // 插入 can 总线子系统
     + modprobe can-raw   //插入can 协议模块
@@ -22,4 +22,4 @@
 端口：can0
 波特率：500KB 
 restart：100ms
-运行文件夹中canable.sh
+运行文件夹中`sudo ./canable.sh`
