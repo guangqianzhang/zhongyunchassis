@@ -28,8 +28,12 @@ namespace vcu_ns
         {
             sub1 = nh_.subscribe<chassis2::cmd>("vcuget", 100, &VCU_TOPIC::chatterCallback1, this);
             pub1 = nh_.advertise<chassis2::vcu_fbk>("vcuback", 100);
+            nh_.param<double>("dri_p",kp,1.6);
+            nh_.param<double>("dri_i",ki,0.0);
+            nh_.param<double>("dri_d",kd,0.3);
             vcu_msg1 = (chassis2::vcu_fbk *)&zhongyun_obj.vcu_state;
         };
+        //远程调试回调
         void chatterCallback1(const chassis2::cmd::ConstPtr &msg)
         {
                    able = msg->control_enable;
@@ -56,7 +60,7 @@ namespace vcu_ns
             // vcu_msg1->Vehicle_Spd=zhongyun_obj.vcu_state.Vehicle_Spd;
             pub1.publish(*vcu_msg1);
             // zhongyun_obj.user_set_ctl.Drive=vcu_pid.realize(kp,ki,kd);
-            if(zhongyun_obj.user_set_ctl.Gear==3&&zhongyun_obj.user_set_ctl.Enb==1)driv=vcu_pid.realize(1.6,0.0,0.3);
+            if(zhongyun_obj.user_set_ctl.Gear==3&&zhongyun_obj.user_set_ctl.Enb==1)driv=vcu_pid.realize(kp,ki,kd);
             // if(driv>driv_limit) driv=driv_limit;
             // else if (driv<-driv_limit)driv=-driv_limit; //放算法里面进行限制
             zhongyun_can_set_ENABLE(able);
