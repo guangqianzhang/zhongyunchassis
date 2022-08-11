@@ -28,9 +28,9 @@ namespace vcu_ns
         {
             sub1 = nh_.subscribe<chassis2::cmd>("vcuget", 100, &VCU_TOPIC::chatterCallback1, this);
             pub1 = nh_.advertise<chassis2::vcu_fbk>("vcuback", 100);
-            nh_.param<double>("dri_p",kp,1.6);
-            nh_.param<double>("dri_i",ki,0.0);
-            nh_.param<double>("dri_d",kd,0.3);
+            nh_.setParam<double>("dri_p",kp,1.6);
+            nh_.setParam<double>("dri_i",ki,0.0);
+            nh_.setParam<double>("dri_d",kd,0.3);
             vcu_msg1 = (chassis2::vcu_fbk *)&zhongyun_obj.vcu_state;
         };
         //远程调试回调
