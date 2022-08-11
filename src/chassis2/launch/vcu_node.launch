@@ -5,5 +5,8 @@
         <param name="chassis_gear" type="int" value="0"/>
         <param name="chassis_vel" type="double" value="0"/>
         <param name="chassis_str" type="double" value="0"/>
+        <param name="dri_p" type="double" value="1.6"/>
+        <param name="dri_i" type="double" value="0.0"/>
+        <param name="dri_d" type="double" value="0.3"/>
     </node>
 </launch>
