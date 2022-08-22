@@ -13,8 +13,8 @@ namespace vcu_ns
         ros::Publisher pub1;
         chassis2::vcu_fbk *vcu_msg1;
         Pid vcu_pid;
-        // int able,gear,par,linght;
-        // float ster,bra,driv;
+        
+        double v_limit,t_limit;
         int able=0, gear=0, par=0, linght=0;
         double kp, ki,kd;
         float ster=0.0, bra=0.0, driv=0.0,driv_limit=0.0;
@@ -28,9 +28,13 @@ namespace vcu_ns
         {
             sub1 = nh_.subscribe<chassis2::cmd>("vcuget", 100, &VCU_TOPIC::chatterCallback1, this);
             pub1 = nh_.advertise<chassis2::vcu_fbk>("vcuback", 100);
-            nh_.param<double>("dri_p",kp,1.6);
-            nh_.param<double>("dri_i",ki,0.0);
-            nh_.param<double>("dri_d",kd,0.3);
+            nh_.param<double>("/vcu/dri_p",kp,1.4);
+            nh_.param<double>("/vcu/dri_i",ki,0.0);
+            nh_.param<double>("/vcu/dri_d",kd,0.3);
+            nh_.param<double>("/vcu/v_limit",v_limit,0.6);
+            nh_.param<double>("/vcu/t_limit",t_limit,15.3);
+
+           vcu_pid.set_Limit(v_limit,t_limit);
             vcu_msg1 = (chassis2::vcu_fbk *)&zhongyun_obj.vcu_state;
         };
         //远程调试回调
@@ -60,6 +64,7 @@ namespace vcu_ns
             // vcu_msg1->Vehicle_Spd=zhongyun_obj.vcu_state.Vehicle_Spd;
             pub1.publish(*vcu_msg1);
             // zhongyun_obj.user_set_ctl.Drive=vcu_pid.realize(kp,ki,kd);
+            // std::cout<<"p="<<kp<<" i="<<ki<<"d="<<kd<<std::endl;
             if(zhongyun_obj.user_set_ctl.Gear==3&&zhongyun_obj.user_set_ctl.Enb==1)driv=vcu_pid.realize(kp,ki,kd);
             // if(driv>driv_limit) driv=driv_limit;
             // else if (driv<-driv_limit)driv=-driv_limit; //放算法里面进行限制
