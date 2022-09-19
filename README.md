@@ -26,3 +26,5 @@
 波特率：500KB 
 restart：100ms
 运行文件夹中`sudo ./canable.sh`
+## pid参数调试
+见launch文件各参数设置。实现pid三参数和速度限制、力矩限制参数调整
