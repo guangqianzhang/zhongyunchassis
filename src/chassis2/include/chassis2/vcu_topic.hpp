@@ -49,9 +49,9 @@ namespace vcu_ns
                     //driv_limit= msg->control_drive;
 
                     _g_vel = msg->control_vel;
-                    kp = msg->kp;
-                    ki = msg->ki;
-                     kd = msg->kd;
+                   // kp = msg->kp;
+                   // ki = msg->ki;
+                   // kd = msg->kd;
             // 将接受到的消息打印出来
             ROS_DEBUG("I hear msg->gear: [%d]", msg->control_gear);
             ROS_DEBUG("conrol_drive: [%.f]", msg->control_drive);
